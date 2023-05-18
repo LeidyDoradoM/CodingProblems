@@ -1,39 +1,20 @@
-# remove duplicates from an array in-place.
-
-from tokenize import StringPrefix
-
-
-def removeDuplicates(nums):
-    for i in range(len(nums)-1):
-        value = nums[i]
-        for j in range(i+1,len(nums)):
-            if value == nums[j]:
-                continue
-            else:
-                nums[i+1] = nums[j]
-                k = i+2
-                for k1 in range(j+1,len(nums)):
-                    nums[k] = nums[k1]
-                    k = k+1
-                break 
-    count = 0
-    n=0
-    while n < len(nums)-1:
-        if nums[n]< nums[n+1]:
-            count = count+1
-        else:
-            break
-        n = n+1
-    return (count+1,nums)
-
-
-#nums = [0,0,0,0,0,1,1,2,2,3,3,4]
-
-#(k, nums1) = removeDuplicates(nums)
-#print(nums1)
-#print(k)
-
-# search the index of a target
+# 1. remove duplicates from a sorted array (in-place), this solution could be also found in 
+# remduplicatesinArray.py
+def removeDuplicates(arr):
+    n = len(arr)
+    if n == 0:
+        return 0
+    indx = 0
+    prev = arr[0]
+    for i in range(0,n):
+        if arr[i] != prev:
+            arr[indx+1] = arr[i]  
+            indx = indx+1
+            prev = arr[i]
+    return indx+1
+#-------------------------------------
+#2. Given a sorted array of integers and a target, find the index of the target if it is in the
+# array. If not, the index where it would be if it were inserted in order
 def searchInsert(nums, target):
     start = 0
     end = len(nums)-1
@@ -55,10 +36,8 @@ def searchInsert(nums, target):
     if nums[end] < target:
         return end+1
 
-nums = [1,3]
-target =4
-#print(searchInsert(nums,target))
-
+# --------------------------------------
+# 3. find the longest substring 
 def longestSubstring(string):
     if string == "":
         return 0
@@ -94,11 +73,10 @@ def longestSubstring(string):
                 longest = count
                 
         return longest
-
 stri = 'aab'
 #print(longestSubstring(stri))
-
-# Median of 2 sorted arrays
+#----------------------------------
+# 4. Given two sorted arrays, return the median of the two sorted arrays in O(log(m+n)) time
 def median2arrays(nums1,nums2):
     n = len(nums1)
     m = len(nums2)
@@ -117,7 +95,7 @@ def median2arrays(nums1,nums2):
         outarray[i+j:] = nums2[j:]
     if j == m:
         outarray[i+j:] = nums1[i:]
-    print(outarray)
+    #print(outarray)
     if len(outarray)%2 == 0:
         median = (outarray[len(outarray)//2 - 1] + outarray[len(outarray)//2])/2
     else:
@@ -127,9 +105,10 @@ def median2arrays(nums1,nums2):
 
 nums1 = [1,2]
 nums2 = [3,4]
-#print(median2arrays(nums1,nums2))
-
-# reverse integer
+print(median2arrays(nums1,nums2))
+#-------------------------------------
+# 5. given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes
+# the value to go outside the signed 32-bit integer range [-2^31,2^31 -1], then return 0.
 def reverse(x):
     flag = False
     if x < 0:
@@ -149,10 +128,11 @@ def reverse(x):
             reversed = reversed+str(residue)
             x = cociente
         reversed= reversed+str(cociente)
-        if flag == True:
-            return -int(reversed)
+        if int(reversed) >=2**31-1 or int(reversed) <=-2**31: return 0
         else:
-            return int(reversed)
+            if flag == True:
+                return -int(reversed)
+            else:
+                return int(reversed)
         
-
-print(reverse(903))
+#print(reverse(903))

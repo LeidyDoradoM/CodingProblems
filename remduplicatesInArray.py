@@ -1,4 +1,4 @@
-# This approach remove 'in-place' duplicates in an array and gives back the number 
+# This approach remove 'in-place' duplicates in a sorted array and gives back the number 
 # of unique elements in the array, but this solutions isn't efficient when the array 
 # is big and have a big number of repeated items.
 
@@ -29,6 +29,18 @@ def removeDuplicates(nums):
     n = n + 1
   return [nums, count + 1]
 
+def removeDuplicatesImproved(arr):
+    n = len(arr)
+    if n == 0:
+        return 0
+    indx = 0
+    prev = arr[0]
+    for i in range(0,n):
+        if arr[i] != prev:
+            arr[indx+1] = arr[i]  
+            indx = indx+1
+            prev = arr[i]
+    return indx+1
 
-nums = [1, 1, 2]
-print(removeDuplicates(nums))
+nums = [1,1,2]
+print(removeDuplicatesImproved(nums))

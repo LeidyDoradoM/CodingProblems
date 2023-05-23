@@ -35,46 +35,40 @@ def searchInsert(nums, target):
         return start
     if nums[end] < target:
         return end+1
-
 # --------------------------------------
 # 3. find the longest substring 
-def longestSubstring(string):
-    if string == "":
+def longestSubstring(s):
+    if s == "":
         return 0
-    elif len(string) == 1:
-        return 1
-    elif len(string) == 2:
-        if string[0] != string[1]:
-            return 2
-        else:
-            return 1
     else:
-        i = 0
-        j = 1
-        count = 0
-        longest = count
-        while i < len(string):
-            print('i:', i)
-            while j < len(string):
-                print('j:', j)
-                if string[i] != string[j]:
-                    j = j+1
+        letters = {}
+        count = 0 
+        long = []
+        for idx in range(len(s)):
+            flag = 0
+            print('Idx',idx)
+            for i in s[idx:]:
+                print('string:', s[idx:])
+                if i not in letters:
+                    letters[i]= 1
+                    count = count+1
+                    print('not i',i)
+                    print('not i',count)
                 else:
-                    i = j
-                    count = i
-                    j = i+1
-                    print(count)
-            
-            if j == len(string):
-                i = i+1
-                count = i
-                j = i+1
-            if longest <= count:
-                longest = count
-                
-        return longest
-stri = 'aab'
-#print(longestSubstring(stri))
+                    flag = 1
+                    print('i',i)
+                    long.append(len(letters))
+                    print('long string:',long)
+                    break
+            if flag == 0:
+                long.append(count)
+            letters = {}
+            count = 0
+        print(long)
+        longest = max(long)              
+        return longest 
+stri = 'abcbbcc'
+print(longestSubstring(stri))
 #----------------------------------
 # 4. Given two sorted arrays, return the median of the two sorted arrays in O(log(m+n)) time
 def median2arrays(nums1,nums2):
@@ -103,9 +97,9 @@ def median2arrays(nums1,nums2):
 
     return median
 
-nums1 = [1,2]
-nums2 = [3,4]
-print(median2arrays(nums1,nums2))
+#nums1 = [1,2]
+#nums2 = [3,4]
+#print(median2arrays(nums1,nums2))
 #-------------------------------------
 # 5. given a signed 32-bit integer x, return x with its digits reversed. If reversing x causes
 # the value to go outside the signed 32-bit integer range [-2^31,2^31 -1], then return 0.
@@ -133,6 +127,5 @@ def reverse(x):
             if flag == True:
                 return -int(reversed)
             else:
-                return int(reversed)
-        
+                return int(reversed)      
 #print(reverse(903))

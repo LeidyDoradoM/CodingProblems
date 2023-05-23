@@ -1,3 +1,4 @@
+#1. Given a roman numeral, convert it to an integer
 def romanToInt(s):
         romans = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
         total = 0
@@ -18,8 +19,9 @@ def romanToInt(s):
         return total
 
 #print(romanToInt('VI'))
-
-#-------- Longest Common Prefix -----------
+#-------------------------
+#2. Find the Longest Common Prefix string amongst an array of strings. If there is no common
+# prefix, return an empty string ""
 def commonPrefx(arry):
     N = min(arry,key=len)
     output = ""
@@ -47,8 +49,11 @@ def commonPrefx(arry):
 arry = ['car','cir']
 result = commonPrefx(arry)
 print(result)      
-
-#------Valid Parentheses --------
+#---------------------------
+#3. Given a string containing just the characters "(,),{,},[,]", determine if the input string
+# is valid. A string is valid if: Open brackets must be closed by the same type of brackets,
+# Open brackets must be closed in the correct order, Every close bracket has a corresponding open
+# bracket of the same type.
 def isValid(s):
     openlist = ['(','[','{']
     closelist = [')',']','}']

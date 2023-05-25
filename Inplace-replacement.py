@@ -46,25 +46,18 @@ def longestSubstring(s):
         long = []
         for idx in range(len(s)):
             flag = 0
-            print('Idx',idx)
             for i in s[idx:]:
-                print('string:', s[idx:])
                 if i not in letters:
                     letters[i]= 1
                     count = count+1
-                    print('not i',i)
-                    print('not i',count)
                 else:
                     flag = 1
-                    print('i',i)
                     long.append(len(letters))
-                    print('long string:',long)
                     break
             if flag == 0:
                 long.append(count)
             letters = {}
             count = 0
-        print(long)
         longest = max(long)              
         return longest 
 stri = 'abcbbcc'
